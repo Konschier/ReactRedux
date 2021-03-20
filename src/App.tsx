@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useRef, useContext } from 'react';
+
+import Nome from './components/nome';
+import Sobrenome from './components/sobrenome';
+import { Context } from './context';
 
 function App() {
+  const { setNomes } = useContext(Context);
+  const nomeRef = useRef<HTMLInputElement>(null);
+  const sobrenomeRef = useRef<HTMLInputElement>(null);
+
+  function handleNomes() {
+    setNomes({
+      nome: nomeRef?.current?.value,
+      sobrenome: sobrenomeRef?.current?.value
+    });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nome />
+      <Sobrenome />
+      <br />
+      <input ref={nomeRef} type="text" placeholder="Nome" />
+      <input ref={sobrenomeRef} type="text" placeholder="Sobreome" />
+      <br />
+      <button onClick={handleNomes}>Definir</button>
     </div>
   );
 }
