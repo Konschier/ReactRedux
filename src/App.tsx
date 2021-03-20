@@ -1,30 +1,31 @@
-import { useRef, useContext } from 'react';
-
-import Nome from './components/nome';
-import Sobrenome from './components/sobrenome';
-import { Context } from './context';
+import { NavLink } from 'react-router-dom';
+import useCount from './hooks/useCount';
 
 function App() {
-  const { setNomes } = useContext(Context);
-  const nomeRef = useRef<HTMLInputElement>(null);
-  const sobrenomeRef = useRef<HTMLInputElement>(null);
+  const { count, plus, minus, reset } = useCount();
 
-  function handleNomes() {
-    setNomes({
-      nome: nomeRef?.current?.value,
-      sobrenome: sobrenomeRef?.current?.value
-    });
+  function increment() {
+    plus();
+  }
+
+  function decrement() {
+    minus();
+  }
+
+  function resetCount() {
+    reset();
   }
 
   return (
     <div className="App">
-      <Nome />
-      <Sobrenome />
+      {count}
       <br />
-      <input ref={nomeRef} type="text" placeholder="Nome" />
-      <input ref={sobrenomeRef} type="text" placeholder="Sobreome" />
+      <button onClick={increment}>Incrementar</button>
+      <button onClick={decrement}>Decrementar</button>
+      <button onClick={resetCount}>Resetar</button>
       <br />
-      <button onClick={handleNomes}>Definir</button>
+      <br />
+      <NavLink to="/test">Ir para test</NavLink>
     </div>
   );
 }
