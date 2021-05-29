@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is an study case that I am learning more about the hooks and how to properly use them.
 
 ## Available Scripts
 
